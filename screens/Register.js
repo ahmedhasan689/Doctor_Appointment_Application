@@ -43,7 +43,7 @@ const CustomTextInput = (props) => {
 
 
 
-export default function App() {
+export default function register(props) {
 
     const [user, setUser] = useState("");
     const [email, setEmail] = useState("");
@@ -119,7 +119,7 @@ export default function App() {
                             <Text style={styles.bottomText} >
                                 Already have An Account ?
                             </Text>
-                            <TouchableOpacity style={styles.bottomClick}>
+                            <TouchableOpacity style={styles.bottomClick} onPress={ () => { props.navigation.navigate('login')} }>
                                 <Text style={{ color: "#FFF", fontWeight: "bold" }}>Sign In</Text>
                             </TouchableOpacity>
                         </View>

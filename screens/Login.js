@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
-
+import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 
 const CustomButton = (props) => {
@@ -43,7 +44,7 @@ const CustomTextInput = (props) => {
 
 
 
-export default function App() {
+export default function Login(props) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -56,10 +57,31 @@ export default function App() {
       message = "You Password Should Be More Than 8 Character"
     }
 
-    Alert.alert(
-      "Login Alert",
-      message
-    );
+    if(message) {
+      Alert.alert(
+        "Login Alert",
+        message
+      );
+    } else {
+
+      const url = "https://doctors-app-api-iugaza.herokuapp.com/api/auth/login";
+      axios.post(url, {
+        "email": email,
+        "password": password
+      }).then((resposne) => {
+        const user = resposne.data;
+        SecureStore.setItemAsync("token", user.token);
+        props.navigation.navigate("home");
+      }).catch( (error) => {
+        console.log(error.message);
+      });
+
+
+
+
+
+    }
+
   }
 
   return (
@@ -90,7 +112,7 @@ export default function App() {
                 onChangeText={setPassword}
               />
 
-              <CustomButton onPress={handleOnSubmitForm} />
+              <CustomButton onPress={ handleOnSubmitForm } />
             </View>
             {/* Bottom Vertor */}
             <View style={{ flexDirection: "row" }}>
@@ -98,7 +120,7 @@ export default function App() {
               <Text style={styles.bottomText} >
                 Don't have An Account ?
               </Text>
-              <TouchableOpacity style={styles.bottomClick}>
+              <TouchableOpacity style={styles.bottomClick} onPress={ () => { props.navigation.navigate('register')} }>
                 <Text style={{ color: "#FFF", fontWeight: "bold" }}>Sign Up</Text>
               </TouchableOpacity>
             </View>

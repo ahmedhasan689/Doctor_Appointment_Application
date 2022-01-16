@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
+import { ActivityIndicator } from 'react-native-web';
 
 
 
@@ -10,9 +11,8 @@ import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, Key
 //         <TouchableOpacity
 //             onPress={props.onPress}
 //             activeOpacity={0.8}
-//             style={styles.customButton}
+//             style={styles.button}
 //         >
-//             <Text style={styles.customButtonText}>Sign Up</Text>
 //         </TouchableOpacity>
 //     )
 
@@ -43,34 +43,49 @@ const CustomTextInput = (props) => {
 
 
 
-export default function App() {
+export default function splash(props) {
 
-  
+    const [isLoggedIn, setLoggedIn] = useState(true);
+
+    // useEffect(() => {
+    //   SecureStore.getItemAsync("token").then((data) => {
+    //     console.log('data', data);
+    //     if (data) {
+    //       setLoggedIn(true);
+    //     }
+    //   }).catch((error) => {
+    //     console.log('error', error.message);
+    //   });
+    // }, [])
+
 
     return (
-        
-                <View style={styles.container}>
-                    <Image 
-                    style={styles.illustration}
-                    source={require('../assets/illustration.png')}/>
-                    <Text style={styles.topText}>
-                        Chat With Doctor
-                    </Text>
-                    <Text style={styles.bottomText}>
-                        Book an appointment with doctor Chat with doctor via appointment letter $ get consultant.
-                    </Text>
-                    <View>
-                        <TouchableOpacity
-                        activeOpacity={0.8} 
-                        style={styles.button}>
-                            <Text style={styles.buttonText}>
-                                Start
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
 
-          
+        <View style={styles.container}>
+            <Image
+                style={styles.illustration}
+                source={require('../assets/illustration.png')} />
+            <Text style={styles.topText}>
+                Chat With Doctor
+            </Text>
+            <Text style={styles.bottomText}>
+                Book an appointment with doctor Chat with doctor via appointment letter $ get consultant.
+            </Text>
+            <View>
+                <TouchableOpacity
+                    onPress={() => { props.navigation.navigate('login') }}
+                    activeOpacity={0.8}
+                    style={styles.button}
+                   >
+                    <Text style={styles.buttonText}>
+                        Start
+                    </Text>
+                </TouchableOpacity>
+
+            </View>
+        </View>
+
+
     );
 }
 
@@ -83,14 +98,14 @@ const styles = StyleSheet.create({
     },
     illustration: {
         marginTop: 125,
-        borderColor: '#68E1FD', 
+        borderColor: '#68E1FD',
         borderWidth: 3,
     },
     topText: {
         fontWeight: 'bold',
         fontSize: 22,
         marginTop: 15,
-    }, 
+    },
     bottomText: {
         marginTop: 15,
         color: '#8C8FA5',
