@@ -71,6 +71,7 @@ export default function Login(props) {
       }).then((resposne) => {
         const user = resposne.data;
         SecureStore.setItemAsync("token", user.token);
+        axios.defaults.headers.common['Authorization'] = "token " + user.token
         props.navigation.navigate("home");
       }).catch( (error) => {
         console.log(error.message);

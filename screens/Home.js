@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, Button, TouchableOpacity, KeyboardAvoidingView, ScrollView, Alert } from 'react-native';
-import { ActivityIndicator } from 'react-native-web';
+import { borderColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 export default function home() {
     return <KeyboardAvoidingView>
         <ScrollView>
@@ -20,8 +20,7 @@ export default function home() {
 
                 <TouchableOpacity style={ styles.searchIcon }>
                     <Image
-                        resizeMode='contain'
-                        style={styles.searchIcon}
+                        style={{ right: 12, top: 12, zIndex:2, position: 'absolute' }}
                         source={require('../assets/Vector-4.png')}
                     />
                 </TouchableOpacity>
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
 
     container: {
         height: 720,
-        marginTop: 30,
+        marginTop: 0,
         flex: 1,
         backgroundColor: '#555FD2',
         alignItems: 'center',
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
         height: 50,
         paddingRight: 35,
         paddingLeft: 35,
-        marginTop: 6,
+        marginTop: 10,
         marginBottom: 10,
         width: 340,
         fontSize: 16,
@@ -64,21 +63,18 @@ const styles = StyleSheet.create({
         position: "absolute",
         zIndex: 2,
         marginRight: 4,
-        top: 151,
+        top: 155,
         left: 320,
     },
     searchIcon: {
-        fontWeight: "bold",
-        // fontSize: 14,
-        position: 'absolute',
-        zIndex: 200,
-        color: "#000",
-        top: 75,
-        right: 155,
-        backgroundColor: '#555FD2',
-        height: 50,
         width: 50,
-        fontSize: 10,
+        height: 50,
+        top: -60,
+        right: 145,
+        backgroundColor: '#555FD2',
+        borderRadius: 5,
+        borderColor: '#fff',
+        borderWidth: 1
     }
 
 
